@@ -45,6 +45,5 @@ img {
 }
 
 .w-80{
-  /* width: 80%; */
   flex-wrap: nowrap;
 }
