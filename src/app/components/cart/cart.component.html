@@ -1,0 +1,120 @@
+<div class="cart-container">
+  <div *ngIf="products.length == 0">
+    <div>
+      <h2>
+        The cart is empty now. Let's shopping.
+        <a routerLink=""><i class="fas fa-shopping-basket"></i></a>
+      </h2>
+    </div>
+    <div class="mt-3">
+      <a routerLink=""
+        ><i class="fas fa-arrow-left"></i> Back to product list</a
+      >
+    </div>
+  </div>
+
+  <div *ngIf="products.length != 0" class="row w-80">
+    <div class="col-6 cart-item-details">
+      <div *ngFor="let product of products">
+        <app-cart-item [product]="product"></app-cart-item>
+      </div>
+      <h1 class="cart-total">Total: $ {{ total }}</h1>
+    </div>
+
+    <div class="col-6">
+      <form #form="ngForm" class="form-group" (ngSubmit)="onSubmit()">
+        <div class="cart-input">
+          <label class="h3">Full Name</label>
+          <br />
+          <input
+            class="form-control"
+            [(ngModel)]="billInfo.userName"
+            name="username"
+            #username="ngModel"
+            required
+            type="text"
+            minlength="5"
+            placeholder="Enter your name"
+            [ngClass]="{
+              'is-invalid': username.invalid && username.touched
+            }"
+          />
+
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="username.invalid && username.touched"
+          >
+            <div *ngIf="username.errors?.['required']">Name is required.</div>
+            <div *ngIf="username.errors?.['minlength']">
+              Name must be at least 5 characters long.
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-input mt-2">
+          <label class="h3">Address</label>
+          <br />
+          <input
+            class="form-control"
+            [(ngModel)]="billInfo.address"
+            required
+            type="text"
+            placeholder="Enter your address"
+            name="address"
+            #address="ngModel"
+            [ngClass]="{
+              'is-invalid': address.invalid && address.dirty && address.touched
+            }"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="address.invalid && address.touched"
+          >
+            <div *ngIf="address.errors?.['required']">Address is required.</div>
+          </div>
+        </div>
+        <div class="cart-input mt-2">
+          <label class="h3">Credit card number</label>
+          <br />
+          <input
+            class="form-control"
+            type="number"
+            required
+            [(ngModel)]="billInfo.creditCardNumber"
+            placeholder="Enter your Credit card number"
+            name="creditCardNumber"
+            #creditCardNumber="ngModel"
+            [ngClass]="{
+              'is-invalid':
+                creditCardNumber.invalid &&
+                creditCardNumber.dirty && creditCardNumber.touched
+            }"
+          />
+          <div
+            class="alert alert-danger"
+            role="alert"
+            *ngIf="creditCardNumber.invalid && creditCardNumber.touched"
+          >
+            <div *ngIf="creditCardNumber.errors?.['required']">
+              Credit card is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <h5 class="text-secondary">
+            We'll never share your payment details with anyone else.
+          </h5>
+        </div>
+
+        <div>
+          <button type="submit" [disabled]="form.invalid" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="product-container">
+  <img class="product-image link" src="{{this.product.url}}" alt="{{ this.product.name }}"  (click)="goToDetail()" />
+  <h2 class="link" (click)="goToDetail()">{{ this.product.name }}</h2>
+  <h5>$ {{ this.product.price }}</h5>
+
+  <div class="input-group select-input">
+    <select class="custom-select" [(ngModel)]="amount" (change)="onChangeAmount($event)">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+  </select>
+  </div>
+
+  <button type="button" class="btn btn-primary" (click)="addProductToCart(product)">
+    <i class="fas fa-cart-plus"></i> Add to cart
+  </button>
+</div>
