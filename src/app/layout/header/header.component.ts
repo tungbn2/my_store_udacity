@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Product } from 'src/app/model/product.model';
+import { CartService } from 'src/app/service/cart.service';
 import { StoreService } from 'src/app/service/store.service';
 
 @Component({
@@ -12,12 +14,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   $sub!: Subscription
 
-  constructor(private store: StoreService) { }
+  constructor(private store: StoreService, private cart: CartService) { }
 
   ngOnInit(): void {
-    this.$sub = this.store.productsInCartData.subscribe(list => {
+    this.$sub = this.cart.productsInCartData.subscribe(list => {
       let total = 0;
-      list.forEach(item => total += item.amount);
+      list.forEach((item: Product) => total += item.amount);
       this.numberProductInCart = total;
     })
   }

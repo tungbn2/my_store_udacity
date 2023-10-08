@@ -2,10 +2,11 @@
   <img class="img" src="{{this.product.url}}" alt="{{ this.product.name }}" />
   <div class="detail-item">
       <h1 class="header">{{ this.product.name }}</h1>
+      <p class="h5">{{this.product.description}}</p>
       <h3>$ {{ this.product.price }}</h3>
 
       <div class="input-group select-input">
-        <select class="custom-select" [(ngModel)]="amount" (change)="onChangeAmount($event)">
+        <select class="custom-select" [(ngModel)]="amount" (ngModelChange)="onChangeAmount($event)">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>

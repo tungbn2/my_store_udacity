@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/model/product.model';
+import { CartService } from 'src/app/service/cart.service';
 import { StoreService } from 'src/app/service/store.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class ProductItemDetailComponent implements OnInit {
   amount: number = 1;
   id: string | null = '';
 
-  constructor(private store: StoreService, private route: ActivatedRoute) {}
+  constructor(private store: StoreService, private cart: CartService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -44,11 +45,11 @@ export class ProductItemDetailComponent implements OnInit {
   }
 
   onChangeAmount(event: any) {
-    this.amount = Number(event.target.value);
+    this.amount = Number(event);
   }
 
   addProductToCart() {
     this.product.amount = this.amount;
-    if (this.product) this.store.addToCart(this.product);
+    if (this.product) this.cart.addToCart(this.product);
   }
 }

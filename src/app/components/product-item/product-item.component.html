@@ -4,7 +4,7 @@
   <h5>$ {{ this.product.price }}</h5>
 
   <div class="input-group select-input">
-    <select class="custom-select" [(ngModel)]="amount" (change)="onChangeAmount($event)">
+    <select class="custom-select" [(ngModel)]="amount" (ngModelChange)="onChangeAmount($event)">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>

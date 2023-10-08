@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/model/product.model';
-import { StoreService } from 'src/app/service/store.service';
+import { CartService } from 'src/app/service/cart.service';
 
 @Component({
   selector: 'app-product-item',
@@ -16,12 +16,12 @@ export class ProductItemComponent implements OnInit {
 
   amount:number = 1;
 
-  constructor(private route: Router, private store: StoreService) {}
+  constructor(private route: Router, private cart: CartService) {}
 
   ngOnInit(): void {}
 
   onChangeAmount(event: any) {
-    this.amount = Number(event.target.value);
+    this.amount = Number(event);
   }
 
   goToDetail() {
@@ -30,6 +30,6 @@ export class ProductItemComponent implements OnInit {
 
   addProductToCart(addProduct: Product) {
     addProduct.amount = this.amount;
-    this.store.addToCart(addProduct);
+    this.cart.addToCart(addProduct);
   }
 }
